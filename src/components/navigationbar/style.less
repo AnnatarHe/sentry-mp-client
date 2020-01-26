@@ -1,0 +1,51 @@
+.ui-navigation {
+  width: 100vw;
+}
+
+.navigation-bar {
+  width: 100%;
+  position: fixed;
+  z-index: 900;
+
+  .bg {
+    position: fixed;
+    z-index: -10;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 128rpx;
+    background: rgba(255,255,255,.5);
+    overflow: hidden;
+  }
+}
+
+.bar {
+  position: relative;
+
+  .home-icon {
+    width: 36rpx;
+    height: 36rpx;
+  }
+  .title {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .title-text {
+      font-size: 34rpx;
+      color: #030303;
+    }
+  }
+  .touchable {
+    position: absolute;
+    top: 0rpx;
+    left: 0rpx;
+    line-height: 1;
+    // 最小可返回区域
+    min-width: 90rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

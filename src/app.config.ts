@@ -1,9 +1,13 @@
 import { AppConfig } from "remax/wechat";
 
 const config: AppConfig = {
-  pages: ['pages/index/index'],
+  pages: [
+    'pages/landing/landing',
+    'pages/index/index',
+    'pages/auth/auth'
+  ],
   window: {
-    navigationBarTitleText: 'Remax Wechat Template',
+    navigationBarTitleText: 'sentry client',
     navigationBarBackgroundColor: '#282c34'
   }
 };
