@@ -3,7 +3,7 @@ import { AppConfig } from "remax/wechat";
 const config: AppConfig = {
   pages: [
     'pages/landing/landing',
-    'pages/index/index',
+    'pages/project/project',
     'pages/auth/auth'
   ],
   window: {

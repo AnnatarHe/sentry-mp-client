@@ -41,7 +41,7 @@ export interface Organization {
   status: Status;
 }
 
-export interface FetchAllProjectsResponse {
+export interface SentryProject {
   avatar: Avatar;
   color: string;
   dateCreated: Date;
@@ -81,7 +81,7 @@ export interface Stats {
 export interface StatusDetails {
 }
 
-export interface FetchProjectIssuesResponse {
+export interface SentryIssue {
   annotations: any[];
   assignedTo?: any;
   count: string;

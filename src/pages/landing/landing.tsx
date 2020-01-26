@@ -4,8 +4,12 @@ import { View, Text, Image, redirectTo } from 'remax/wechat'
 import styles from './style.module.less'
 import { API_TOKEN } from '@/service/base'
 import { fetchAllOrganizations, fetchAllProjects } from '@/service/organizations'
+import { useDispatch } from 'react-redux'
+import { PROJECT_FETCH_SAGA } from '@/redux/constants/project'
 
 function Landing() {
+
+  const dispatch = useDispatch()
 
   useEffect(() => {
     if (!API_TOKEN) {
@@ -15,12 +19,7 @@ function Landing() {
       return
     }
 
-    console.log('landing')
-
-    fetchAllProjects().then(projects => {
-      console.log(projects)
-      // TODO: set to local storage
-    })
+    dispatch({ type: PROJECT_FETCH_SAGA })
 
   }, [])
 

@@ -11,7 +11,8 @@ type NavigationBarProps = {
   hasHolder: boolean
   homeIcon?: string
   onBack?: () => void
-  children: any
+  children?: any
+  left?: React.ReactElement
 }
 
 
@@ -21,12 +22,12 @@ function useStatusBarSize(hasHolder: boolean) {
 
   useEffect(() => {
     getSystemInfo().then(resp => {
-      setBarHeight(resp.statusBarHeight)
+      setBarHeight(resp.statusBarHeight * 2)
       setPlatformHeight(resp.platform !== 'ios' ? 8 : 6)
     })
   }, [])
 
-  const contentHeight = 32 + platformHeight * 2
+  const contentHeight = 32 * 2 + platformHeight * 2
 
   return {
     barHeight,
@@ -47,23 +48,28 @@ function NavigationBar(props: NavigationBarProps) {
       <View className={`navigation-bar ${props.containerClassName}`}>
         <View className="bg" style={{ height: containerHeight + 'px' }} />
         <View className="holder" style={{ height: barHeight + 'px' }} />
-        <View className="bar">
-          <View
-            className="touchable"
-            onClick={props.onBack}
-            style={{ height: contentHeight + 'px' }}
-          >
-            <Image
-              src={props.homeIcon || defaultBackIcon}
-              className={`home-icon ${props.homeIconClassName}`}
-            />
-          </View>
-          <View
-            className="title"
-            style={{ height: contentHeight + 'px' }}
-          >
-            {props.children}
-          </View>
+        <View
+          className="bar"
+          style={{ height: contentHeight + 'px' }}
+        >
+          {props.left ?? (
+            <View
+              className="touchable"
+              onClick={props.onBack}
+            >
+              <Image
+                src={props.homeIcon || defaultBackIcon}
+                className={`home-icon ${props.homeIconClassName}`}
+              />
+            </View>
+          )}
+          {props.children && (
+            <View
+              className="title"
+            >
+              {props.children}
+            </View>
+          )}
         </View>
       </View>
     </View>

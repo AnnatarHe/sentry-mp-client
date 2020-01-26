@@ -30,6 +30,8 @@
     "@babel/preset-typescript": "^7.8.3",
     "@types/jest": "^24.9.1",
     "@types/react": "^16.9.16",
+    "@types/react-redux": "^7.1.7",
+    "@types/redux-logger": "^3.0.7",
     "babel-jest": "^25.1.0",
     "chokidar": "^3.3.0",
     "jest": "^25.1.0",

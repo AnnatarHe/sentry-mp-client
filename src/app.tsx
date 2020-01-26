@@ -1,6 +1,15 @@
-import * as React from 'react';
-import './app.css';
+import React from 'react'
+import { Provider } from 'react-redux'
+import store from './redux'
 
-const App: React.FC = props => props.children as React.ReactElement;
+import './app.css'
+
+function App({ children }: { children: React.ReactElement}) {
+  return (
+    <Provider store={store}>
+      {children}
+    </Provider>
+  )
+}
 
 export default App;
