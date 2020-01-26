@@ -1,4 +1,5 @@
 import { request, getStorageSync, setStorage } from "remax/wechat";
+import { parseLink } from "./utils";
 
 export enum HTTPMethod {
   GET = 'GET',
@@ -9,6 +10,7 @@ export enum HTTPMethod {
 
 const API_TOKEN_KEY = 'app:token'
 
+// 测试: 498c8c1549c44ea984dfa81e51dc2bab66b71cbd77f04c88a84faf5dc61acdc8
 export let API_TOKEN = getStorageSync(API_TOKEN_KEY)
 export async function updateAPIToken(t: string) {
   await setStorage({
@@ -18,9 +20,13 @@ export async function updateAPIToken(t: string) {
   API_TOKEN = t;
 }
 
-export async function sentryRequest<T>(url: string, method: HTTPMethod,  body: any) {
+const l = `<https://sentry.io/api/0/organizations/?&cursor=1509604010326:0:1>; rel="previous"; results="false"; cursor="1509604010326:0:1", <https://sentry.io/api/0/organizations/?&cursor=1509604010327:100:0>; rel="next"; results="false"; cursor="1509604010327:100:0"`
+
+parseLink(l)
+
+export async function sentryRequest<T, R>(url: string, method: HTTPMethod,  body?: T) {
   const response = await request({
-    url,
+    url: `https://sentry.io/api/0/${url}`,
     data: body,
     method,
     timeout: 2000,
@@ -33,5 +39,17 @@ export async function sentryRequest<T>(url: string, method: HTTPMethod,  body: a
     throw response
   }
 
-  return response.data as T
+  const { prev, next, hasMore } = parseLink(response.header.Link)
+
+  return {
+    prev,
+    next,
+    hasMore,
+    data: response.data
+  } as {
+    prev?: string,
+    next?: string,
+    hasMore: boolean,
+    data: R
+  }
 }

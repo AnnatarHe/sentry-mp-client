@@ -3,7 +3,7 @@ import { View, Text, Image, redirectTo } from 'remax/wechat'
 
 import styles from './style.module.less'
 import { API_TOKEN } from '@/service/base'
-import TokenInput from '../../components/token-input/token-input'
+import { fetchAllOrganizations, fetchAllProjects } from '@/service/organizations'
 
 function Landing() {
 
@@ -12,7 +12,16 @@ function Landing() {
       redirectTo({
         url: '/pages/auth/auth'
       })
+      return
     }
+
+    console.log('landing')
+
+    fetchAllProjects().then(projects => {
+      console.log(projects)
+      // TODO: set to local storage
+    })
+
   }, [])
 
   return (
