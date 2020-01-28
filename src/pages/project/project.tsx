@@ -1,6 +1,6 @@
-import React, { useCallback, useState, useEffect } from 'react'
-import { View, Text, Image } from 'remax/wechat'
-import { useSelector } from 'react-redux'
+import React, { useCallback, useState, useEffect, Fragment } from 'react'
+import { View, Navigator } from 'remax/wechat'
+import { useSelector, useDispatch } from 'react-redux'
 import { StoreData } from '@/redux/reducers'
 import { SentryProject, SentryIssue } from '@/service/types'
 import NavigationBar from '@/components/navigationbar/navigationbar'
@@ -9,30 +9,31 @@ import styles from './project.module.less'
 import './project.less'
 import ProjectPicker from '@/components/project-picker/project-picker'
 import Issues from '@/components/issues/issues'
+import { ProjectStore } from '@/redux/reducers/project'
+import { PROJECT_SELECTED_CHANGE, ISSUE_LOADED, ISSUES_LOAD_MORE } from '@/redux/constants/project'
 
 function Project(props: any) {
-  const [currentProject, setCurrentProject] = useState<SentryProject | null>(null)
-  const projects = useSelector<StoreData, SentryProject[]>(s => s.project.projects)
+  const dispatch = useDispatch()
+  const { projects } = useSelector<StoreData, ProjectStore>(s => s.project)
 
   const onPick = useCallback((project: SentryProject) => {
-    setCurrentProject(project)
+    dispatch({ type: PROJECT_SELECTED_CHANGE, project })
+    dispatch({ type: ISSUES_LOAD_MORE, project })
   }, [projects])
-
-  useEffect(() => {
-    if (!currentProject && projects.length > 0) {
-      setCurrentProject(projects[0])
-    }
-  }, [currentProject, projects])
 
   return (
     <View className={styles.page + ' project-page'}>
       <NavigationBar
         hasHolder={true}
-        left={<ProjectPicker projects={projects} onPick={onPick} />}
+        left={
+          <View className={styles.header}>
+            <Navigator url='/pages/settings/settings'> ⚙️ </Navigator>
+            <ProjectPicker projects={projects} onPick={onPick} />
+          </View>
+        }
       />
       <View className={styles.body}>
-        <Text className={styles.title}>Issue:</Text>
-        {currentProject && <Issues project={currentProject} />}
+        <Issues />
       </View>
     </View>
   )
