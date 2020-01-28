@@ -6,7 +6,8 @@ import { fetchProjectIssues } from '@/service/project'
 import { ProjectStore } from '../reducers/project'
 import { SentryProject } from '@/service/types'
 
-function* initProjectsData() {
+function* initProjectsData(action: any) {
+  const redirectUrl = action.redirectTo
   showLoading({
     title: 'loading...',
     mask: true,
@@ -20,7 +21,7 @@ function* initProjectsData() {
     yield call(hideLoading)
 
     yield call(redirectTo, {
-      url: '/pages/project/project'
+      url: redirectUrl ?? '/pages/project/project'
     })
   } catch (e) {
     yield call(hideLoading)
@@ -47,8 +48,6 @@ export function* loadIssue(action: any) {
   }
 
   const issues = yield call(fetchProjectIssues, currentProject.organization.slug, currentProject.slug, nextKey)
-
-  console.log('issue will load', issues)
 
   yield put({
     type: ISSUE_LOADED,

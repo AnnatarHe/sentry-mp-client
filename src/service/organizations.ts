@@ -19,7 +19,7 @@ export async function fetchAllProjects(
   result: SentryProject[] = []
 ): Promise<SentryProject[]> {
   const projects = await sentryRequest<undefined, SentryProject[]>(
-    `/projects/${next ? ('?cursor=' + next) : ''}`,
+    `projects/${next ? ('?cursor=' + next) : ''}`,
     HTTPMethod.GET
   )
 

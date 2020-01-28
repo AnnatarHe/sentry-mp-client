@@ -5,7 +5,11 @@ type LinkRet = {
   hasMore: boolean
 }
 
-export function parseLink(link: string): LinkRet {
+export function parseLink(link?: string): LinkRet {
+  if (!link) {
+    return { prev: undefined, next: undefined, hasMore: false }
+  }
+
   const links = link.split(',').map(x => x.split(';'))
 
   if (links.length !== 2) {

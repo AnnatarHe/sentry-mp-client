@@ -6,6 +6,7 @@ const config: AppConfig = {
     'pages/project/project',
     'pages/auth/auth',
     'pages/settings/settings',
+    'pages/issue/issue',
   ],
   window: {
     navigationBarTitleText: 'sentry client',

@@ -1,5 +1,5 @@
 import React, { useCallback, useState, useEffect, Fragment } from 'react'
-import { View, Navigator } from 'remax/wechat'
+import { View, Navigator, useReachBottom } from 'remax/wechat'
 import { useSelector, useDispatch } from 'react-redux'
 import { StoreData } from '@/redux/reducers'
 import { SentryProject, SentryIssue } from '@/service/types'
@@ -20,6 +20,10 @@ function Project(props: any) {
     dispatch({ type: PROJECT_SELECTED_CHANGE, project })
     dispatch({ type: ISSUES_LOAD_MORE, project })
   }, [projects])
+
+  useReachBottom(() => {
+    dispatch({ type: ISSUES_LOAD_MORE })
+  })
 
   return (
     <View className={styles.page + ' project-page'}>

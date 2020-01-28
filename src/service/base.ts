@@ -29,7 +29,7 @@ export async function sentryRequest<T, R>(url: string, method: HTTPMethod,  body
     url: `https://sentry.io/api/0/${url}`,
     data: body,
     method,
-    timeout: 2000,
+    timeout: 5000,
     header: {
       Authorization: `Bearer ${API_TOKEN}`
     }
