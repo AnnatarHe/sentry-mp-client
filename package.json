@@ -12,7 +12,8 @@
     "build": "NODE_ENV=production remax build -t wechat",
     "clean": "rimraf dist",
     "prebuild": "npm run clean",
-    "test": "jest"
+    "test": "jest",
+    "replease": "standard-version"
   },
   "dependencies": {
     "date-fns": "^2.9.0",
@@ -39,6 +40,7 @@
     "jest": "^25.1.0",
     "remax-cli": "^1.9.0",
     "rimraf": "^3.0.0",
+    "standard-version": "^7.1.0",
     "typescript": "^3.7.3"
   }
 }
