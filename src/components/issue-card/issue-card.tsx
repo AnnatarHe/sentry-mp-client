@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text } from 'remax/wechat'
+import { View, Text, Navigator } from 'remax/wechat'
 import { SentryIssue } from '@/service/types'
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 
@@ -11,7 +11,10 @@ type IssueCardProps = {
 
 function IssueCard({ issue }: IssueCardProps) {
   return (
-    <View className={styles.issue}>
+    <Navigator
+      className={styles.issue}
+      url={`/pages/issue/issue?id=${issue.id}`}
+    >
       <Text className={styles.title}>{issue.title}</Text>
       <Text className={styles.culprit}>{issue.culprit}</Text>
       <View className={styles.info}>
@@ -25,7 +28,7 @@ function IssueCard({ issue }: IssueCardProps) {
         <Text className={styles.count}> 共计：{issue.count}</Text>
         <Text className={styles.userCount}> 用户：{issue.userCount}</Text>
       </View>
-    </View>
+    </Navigator>
   )
 }
 

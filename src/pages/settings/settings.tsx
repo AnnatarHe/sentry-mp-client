@@ -1,10 +1,19 @@
 import React from 'react'
-import { View } from 'remax/wechat'
+import { View, Navigator, Text } from 'remax/wechat'
+
+import styles from './style.module.less'
 
 function SettingsPage() {
   return (
-    <View>
-      settings
+    <View className={styles.settings}>
+      <Navigator className={styles.item} url='/pages/auth/auth'>
+        <Text className={styles.name}>
+        重新绑定 Token
+        </Text>
+        <Text>
+        ▶
+        </Text>
+      </Navigator>
     </View>
   )
 }
