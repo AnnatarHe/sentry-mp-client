@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.2](https://github.com/AnnatarHe/sentry-mp-client/compare/v0.0.1...v0.0.2) (2020-01-30)
+
+
+### Features
+
+* **endpint:** add endpoint modify page ([3ed7330](https://github.com/AnnatarHe/sentry-mp-client/commit/3ed7330f5bbdd5c4db3974cdb1f01dfe55410d57))
+
+
+### Bug Fixes
+
+* **auth:** 修复鉴权失败的逻辑 ([a9a47f4](https://github.com/AnnatarHe/sentry-mp-client/commit/a9a47f4a4a0dcf2c62e4726317ab75f8cbab72ca))
+
 ### 0.0.1 (2020-01-28)
 
 
