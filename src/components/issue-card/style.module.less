@@ -1,4 +1,4 @@
-@margin-size: 16px;
+@import '../../theme.less';
 
 @keyframes fade-in {
   from {
@@ -13,24 +13,25 @@
 
 .issue {
   color: #fff;
-  padding: @margin-size;
-  background-color: rgba(255, 255, 255, .5);
+  padding: @gap-size;
+  background-color:  @secondary-color;
   backdrop-filter: blur(4px);
   display: flex;
   flex-direction: column;
-  margin-bottom: @margin-size;
+  margin-bottom: @gap-size;
   border-radius: 8px;
   animation: fade-in .35s;
 
   .title {
-    color: #3b6ecc;
+    // color: #3b6ecc;
+    color: @white-local;
     font-weight: 800;
-    font-size: 36px;
+    font-size: 48px;
   }
   .culprit {
     font-size: 24px;
     font-weight: 300;
-    color: rgb(100, 85, 116);
+    color: @grey-local;
   }
 
   .info {

@@ -56,6 +56,7 @@ function NavigationBar(props: NavigationBarProps) {
             <View
               className="touchable"
               onClick={props.onBack}
+              style={{ height: contentHeight + 'px' }}
             >
               <Image
                 src={props.homeIcon || defaultBackIcon}

@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, useShareAppMessage } from 'remax/wechat'
+import { View, Text, useShareAppMessage, navigateBack, redirectTo, showLoading, hideLoading } from 'remax/wechat'
 import NavigationBar from '@/components/navigationbar/navigationbar'
 import { retrieveIssue, retrieveIssueLatestEvent } from '@/service/project'
 import { SentryIssueDetail, SentryEvent } from '@/service/types'
 import IssueCard from '@/components/issue-card/issue-card'
 import IssueTag from '@/components/issue-tag/issue-tag'
 import IssueEntry from '@/components/issue-entry/issue-entry'
-import styles from './issue.module.less'
 import SectionTitle from '@/components/section-title/section-title'
+
+import './issue.less'
+import styles from './issue.module.less'
+import { useNavigateUp } from '@/components/navigationbar/navigation-hooks'
 
 type IssuePageProps = {
   location: {
@@ -35,12 +38,15 @@ function useIssueData(id: string) {
   const [issueEvent, setIssueEvent] = useState<SentryEvent | null>(null)
 
   useEffect(() => {
+    showLoading({ mask: true, title: 'Loading...' })
     Promise.all([
       retrieveIssue(id),
       retrieveIssueLatestEvent(id)
     ]).then(data => {
       setIssueData(data[0])
       setIssueEvent(data[1])
+    }).finally(() => {
+      hideLoading()
     })
   }, [id])
 
@@ -60,34 +66,31 @@ function IssuePage(props: IssuePageProps) {
     }
   })
 
+  const onNavigateUp = useNavigateUp()
+
   return (
-    <View className={styles.issuePage}>
+    <View className={styles.issuePage + ' issue-page'}>
       <NavigationBar
         hasHolder
-        left={
-          <View className={styles.titleBox}>
-            <Text className={styles.title}>
-              {issueData?.title ?? 'Loading...'}
-            </Text>
-          </View>
-        }
-      />
+        onBack={onNavigateUp}
+      >
+        <Text>
+          {issueData?.shortId ?? 'loading'}
+        </Text>
+      </NavigationBar>
 
       {issueData && issueEvent && (
         <View className={styles.body}>
           <IssueCard issue={issueData} />
           <View className={styles.divider} />
-
           <View className={styles.content}>
             <TagsInfo issue={issueEvent} />
-
             <View>
               {issueEvent?.entries.map((entry, index) => (
                 <IssueEntry entry={entry} key={index} />
               ))}
             </View>
           </View>
-
         </View>
       )}
     </View>

@@ -27,7 +27,7 @@ function ProjectPicker(props: PickerProps) {
   return (
     <View className={styles.picker}>
       <Picker mode='selector' range={props.projects} value={currentIndex} onChange={onPickerChange} rangeKey='name'>
-        <Text className={styles.name} >{p.organization.name}/{p.name} ⬇️</Text>
+        <Text className={styles.name} >{p.organization.name}/{p.name}   ⬇️</Text>
       </Picker>
     </View>
   )

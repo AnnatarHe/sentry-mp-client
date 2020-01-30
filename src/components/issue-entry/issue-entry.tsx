@@ -19,9 +19,9 @@ function IssueEntry({ entry }: { entry: Entry }) {
       {entry.type === 'request' && (
         <View className={styles.request}>
           <SectionTitle title='🕸 Request: ' />
-          <Text>{entry.data.url}</Text>
-          <Text>Headers:</Text>
-          <View>
+          <Text className={styles.requestUrl}>{entry.data.url}</Text>
+          <Text className={styles.headersTitle}>Headers:</Text>
+          <View className={styles.headers}>
             {entry.data.headers.map((h) => (
               <View key={h[0]}>
                 <Text>{h[0]}</Text>

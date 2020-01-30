@@ -1,4 +1,4 @@
-import { request, getStorageSync, setStorage } from "remax/wechat";
+import { request, getStorageSync, setStorage, navigateTo } from "remax/wechat";
 import { parseLink } from "./utils";
 
 export enum HTTPMethod {
@@ -34,6 +34,13 @@ export async function sentryRequest<T, R>(url: string, method: HTTPMethod,  body
       Authorization: `Bearer ${API_TOKEN}`
     }
   })
+
+  if (response.statusCode === 401) {
+    navigateTo({
+      url: '/pages/auth/auth'
+    })
+    throw { errMsg: '401' }
+  }
 
   if (response.statusCode >= 400) {
     throw response
