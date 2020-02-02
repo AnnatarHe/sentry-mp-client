@@ -5,9 +5,7 @@ export class AppEndpoint {
   private hostIndex: number = getStorageSync(AppEndpoint.HOST_KEY) || 0
 
   public static get AVAILABLE_ENDPOINTS() {
-    return [
-      'https://sentry.io'
-    ]
+    return JSON.parse(process.env.REMAX_APP_ENDPOINTS ?? '[]') as string[]
   }
 
   get host() {

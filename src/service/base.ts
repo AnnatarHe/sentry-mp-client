@@ -1,5 +1,6 @@
 import { request, getStorageSync, setStorage, navigateTo } from "remax/wechat";
 import { parseLink } from "./utils";
+import { AppEndpoint, appEndpoint } from "./endpoint";
 
 export enum HTTPMethod {
   GET = 'GET',
@@ -20,13 +21,9 @@ export async function updateAPIToken(t: string) {
   API_TOKEN = t;
 }
 
-const l = `<https://sentry.io/api/0/organizations/?&cursor=1509604010326:0:1>; rel="previous"; results="false"; cursor="1509604010326:0:1", <https://sentry.io/api/0/organizations/?&cursor=1509604010327:100:0>; rel="next"; results="false"; cursor="1509604010327:100:0"`
-
-parseLink(l)
-
 export async function sentryRequest<T, R>(url: string, method: HTTPMethod,  body?: T) {
   const response = await request({
-    url: `https://sentry.io/api/0/${url}`,
+    url: `${AppEndpoint.AVAILABLE_ENDPOINTS[appEndpoint.host]}/api/0/${url}`,
     data: body,
     method,
     timeout: 5000,

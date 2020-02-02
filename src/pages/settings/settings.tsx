@@ -50,7 +50,7 @@ function SettingsPage() {
             onChange={updateEndpint}
           >
             <View className={styles.endpointRow}>
-              <Text className={styles.name}>Endpoint: {AppEndpoint.AVAILABLE_ENDPOINTS[endpointIndex]}</Text>
+              <Text className={styles.name}>Endpoint: {AppEndpoint.AVAILABLE_ENDPOINTS[endpointIndex].replace('https://', '')}</Text>
               <Text className={styles.endpintIcon}>⬇</Text>
             </View>
           </Picker>

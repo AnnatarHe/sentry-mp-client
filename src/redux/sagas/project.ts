@@ -24,6 +24,7 @@ function* initProjectsData(action: any) {
       url: redirectUrl ?? '/pages/project/project'
     })
   } catch (e) {
+    console.error(e)
     yield call(hideLoading)
     yield call(showToast, {
       icon: 'none',
