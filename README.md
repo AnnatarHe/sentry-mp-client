@@ -2,7 +2,7 @@
 
 sentry 小程序客户端，方便查看最新的 bug
 
-![](./docs/qrcode.jpg)
+<img src='./docs/qrcode.jpg' width='200px' />
 
 ## 背景
 
@@ -18,15 +18,15 @@ sentry 小程序客户端，方便查看最新的 bug
 
 将 token 贴入到页面的输入框中（初次打开即会弹出）
 
-![](./docs/auth.png)
+<img src='./docs/auth.png' width='300px' />
 
 成功可以看到您的所有项目列表，首页默认展示第一个项目。通过点击项目即可实现切换
 
-![](./docs/projects.png)
+<img src='./docs/projects.png' width='300px' />
 
 点击可进入详情，简单看一下堆栈信息
 
-![](./docs/issue.png)
+<img src='./docs/issue.png' width='300px' />
 
 如果不是你的 bug 你可以选择转发给其他人处理，或者你拿起电脑来处理。（其实是方便老板直接转发到开发群）
 
