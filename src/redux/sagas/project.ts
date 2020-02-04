@@ -8,7 +8,7 @@ import { SentryProject } from '@/service/types'
 
 function* initProjectsData(action: any) {
   const redirectUrl = action.redirectTo
-  showLoading({
+  yield call(showLoading, {
     title: 'loading...',
     mask: true,
   })
