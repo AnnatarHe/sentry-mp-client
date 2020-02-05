@@ -11,7 +11,6 @@ export enum HTTPMethod {
 
 const API_TOKEN_KEY = 'app:token'
 
-// 测试: 498c8c1549c44ea984dfa81e51dc2bab66b71cbd77f04c88a84faf5dc61acdc8
 export let API_TOKEN = getStorageSync(API_TOKEN_KEY)
 export async function updateAPIToken(t: string) {
   await setStorage({
