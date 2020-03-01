@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.5](https://github.com/AnnatarHe/sentry-mp-client/compare/v0.0.4...v0.0.5) (2020-03-01)
+
+
+### Features
+
+* **docs:** update readme ([4d63ad5](https://github.com/AnnatarHe/sentry-mp-client/commit/4d63ad50bbd4caa72bd8544c1b3355044907df17))
+* **landing:** add retry button ([3b0c77f](https://github.com/AnnatarHe/sentry-mp-client/commit/3b0c77f281449f9b037cce0dca38f3a3f90f6033))
+
+
+### Bug Fixes
+
+* **docs:** update image size ([529d50a](https://github.com/AnnatarHe/sentry-mp-client/commit/529d50ac5a43b572cd93c92bf1b49731b21295b6))
+* **landing:** fix loading effect in saga ([45b92f7](https://github.com/AnnatarHe/sentry-mp-client/commit/45b92f7739cc813db4ea800b78c2aadd3a1ebfe7))
+* **sentry:** remove token ([e096403](https://github.com/AnnatarHe/sentry-mp-client/commit/e0964034de87d7f03120229f324c1f6410651744))
+* **windows:** fix build on windows ([25af576](https://github.com/AnnatarHe/sentry-mp-client/commit/25af5769219dee116ea2608ab14b831e43728f79))
+
 ### 0.0.4 (2020-02-02)
 
 
