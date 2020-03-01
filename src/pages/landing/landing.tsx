@@ -1,10 +1,9 @@
-import React, { useEffect } from 'react'
-import { View, Text, Image, redirectTo } from 'remax/wechat'
+import React, { useEffect, useCallback } from 'react'
+import { View, Text, redirectTo, Button } from 'remax/wechat'
 import { useDispatch } from 'react-redux'
 import qs from 'query-string'
 import { API_TOKEN } from '@/service/base'
 import { PROJECT_FETCH_SAGA } from '@/redux/constants/project'
-
 
 import styles from './style.module.less'
 
@@ -20,6 +19,15 @@ type LandingPageProps = {
 function Landing(props: LandingPageProps) {
   const dispatch = useDispatch()
 
+  const fetchProject = useCallback(() => {
+    const { to, ...params } = props.location.query
+
+    dispatch({
+      type: PROJECT_FETCH_SAGA,
+      redirectTo: to ? (`/pages/${to || 'project/project'}?` + qs.stringify(params)) : null
+    })
+  }, [props.location.query])
+
   useEffect(() => {
     if (!API_TOKEN) {
       redirectTo({
@@ -28,18 +36,13 @@ function Landing(props: LandingPageProps) {
       return
     }
 
-    const { to, ...params } = props.location.query
-
-    dispatch({
-      type: PROJECT_FETCH_SAGA,
-      redirectTo: to ? (`/pages/${to || 'project/project'}?` + qs.stringify(params)) : null
-    })
-
+    fetchProject()
   }, [])
 
   return (
     <View className={styles.landing}>
-      <Text className={styles.text}>loading</Text>
+      <Text className={styles.text}>加载中..</Text>
+      <Button className={styles.retry} onClick={fetchProject}>重试</Button>
     </View>
   )
 }
