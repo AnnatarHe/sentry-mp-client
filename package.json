@@ -43,7 +43,7 @@
     "jest": "^25.1.0",
     "remax-cli": "^1.14.1",
     "rimraf": "^3.0.0",
-    "standard-version": "^7.1.0",
+    "standard-version": "^8.0.1",
     "typescript": "^3.8.2"
   }
 }
