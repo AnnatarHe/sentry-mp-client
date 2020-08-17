@@ -1,5 +1,6 @@
 import React, { useCallback, useState, useEffect, Fragment } from 'react'
-import { View, Navigator, useReachBottom } from 'remax/wechat'
+import { View, Navigator } from 'remax/wechat'
+import { usePageEvent } from 'remax/macro'
 import { useSelector, useDispatch } from 'react-redux'
 import { StoreData } from '@/redux/reducers'
 import { SentryProject, SentryIssue } from '@/service/types'
@@ -21,7 +22,7 @@ function Project(props: any) {
     dispatch({ type: ISSUES_LOAD_MORE, project })
   }, [projects])
 
-  useReachBottom(() => {
+  usePageEvent('onReachBottom', () => {
     dispatch({ type: ISSUES_LOAD_MORE })
   })
 

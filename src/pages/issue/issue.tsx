@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, useShareAppMessage, navigateBack, redirectTo, showLoading, hideLoading } from 'remax/wechat'
+import { View, Text, navigateBack, redirectTo, showLoading, hideLoading } from 'remax/wechat'
 import NavigationBar from '@/components/navigationbar/navigationbar'
 import { retrieveIssue, retrieveIssueLatestEvent } from '@/service/project'
 import { SentryIssueDetail, SentryEvent } from '@/service/types'
@@ -11,6 +11,7 @@ import SectionTitle from '@/components/section-title/section-title'
 import './issue.less'
 import styles from './issue.module.less'
 import { useNavigateUp } from '@/components/navigationbar/navigation-hooks'
+import { usePageEvent } from 'remax/macro'
 
 type IssuePageProps = {
   location: {
@@ -59,7 +60,7 @@ function useIssueData(id: string) {
 function IssuePage(props: IssuePageProps) {
   const { issueData, issueEvent } = useIssueData(props.location.query.id)
 
-  useShareAppMessage(() => {
+  usePageEvent('onShareAppMessage', () => {
     return {
       title: `似乎有个 bug，过来看看?`,
       path: `/pages/landing/landing?to=issue/issue&id=${issueData?.id}`
