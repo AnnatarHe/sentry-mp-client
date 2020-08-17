@@ -1,5 +1,5 @@
 import React, { useEffect, useCallback } from 'react'
-import { View, Text, redirectTo, Button } from 'remax/wechat'
+import { View, Text, redirectTo, Button, cloud } from 'remax/wechat'
 import { useDispatch } from 'react-redux'
 import qs from 'query-string'
 import { API_TOKEN } from '@/service/base'
@@ -38,7 +38,6 @@ function Landing(props: LandingPageProps) {
 
     fetchProject()
   }, [])
-
   return (
     <View className={styles.landing}>
       <Text className={styles.text}>加载中..</Text>

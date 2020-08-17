@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { View, navigateBack } from 'remax/wechat'
+import { View, navigateBack, cloud } from 'remax/wechat'
 
 import styles from './style.module.less'
 import TokenInput from '@/components/token-input/token-input'

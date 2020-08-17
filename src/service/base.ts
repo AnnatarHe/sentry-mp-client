@@ -1,6 +1,5 @@
-import { request, getStorageSync, setStorage, navigateTo } from "remax/wechat";
-import { parseLink } from "./utils";
-import { AppEndpoint, appEndpoint } from "./endpoint";
+import { getStorageSync, setStorage, navigateTo, cloud } from "remax/wechat"
+import { parseLink } from "./utils"
 
 export enum HTTPMethod {
   GET = 'GET',
@@ -19,36 +18,61 @@ export async function updateAPIToken(t: string) {
   });
   API_TOKEN = t;
 }
+cloud.init({
+  env: 'prod-819fo'
+})
 
-export async function sentryRequest<T, R>(url: string, method: HTTPMethod,  body?: T) {
-  const response = await request({
-    url: `${AppEndpoint.AVAILABLE_ENDPOINTS[appEndpoint.host]}/api/0/${url}`,
-    data: body,
+type proxyRequestParams = {
+  method: string
+  token: string
+  url: string
+  body: any
+}
+
+interface proxyResponse<T> {
+  errMsg: string
+  requestID: string
+  result: {
+    link: string
+    status: number
+    body: T
+  }
+}
+
+function cloudRequest<T>(params: proxyRequestParams): Promise<proxyResponse<T>> {
+  return cloud.callFunction({
+    name: 'hello',
+    data: params
+  }).then((res: proxyResponse<T>) => res)
+}
+
+export async function sentryRequest<T, R>(url: string, method: HTTPMethod, body?: T) {
+  const resp = await cloudRequest<R>({
     method,
-    timeout: 5000,
-    header: {
-      Authorization: `Bearer ${API_TOKEN}`
-    }
+    token: API_TOKEN,
+    url,
+    body
   })
 
-  if (response.statusCode === 401) {
+  console.log(resp)
+
+  if (resp.result.status === 401) {
     navigateTo({
       url: '/pages/auth/auth'
     })
     throw { errMsg: '401' }
   }
 
-  if (response.statusCode >= 400) {
-    throw response
+  if (resp.result.status >= 400) {
+    throw resp
   }
 
-  const { prev, next, hasMore } = parseLink(response.header.Link)
-
+  const { prev, next, hasMore } = parseLink(resp.result.link)
   return {
     prev,
     next,
     hasMore,
-    data: response.data
+    data: resp.result.body
   } as {
     prev?: string,
     next?: string,

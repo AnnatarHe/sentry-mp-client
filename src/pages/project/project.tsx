@@ -1,5 +1,5 @@
 import React, { useCallback, useState, useEffect, Fragment } from 'react'
-import { View, Navigator } from 'remax/wechat'
+import { View, Navigator, cloud } from 'remax/wechat'
 import { usePageEvent } from 'remax/macro'
 import { useSelector, useDispatch } from 'react-redux'
 import { StoreData } from '@/redux/reducers'
@@ -21,7 +21,6 @@ function Project(props: any) {
     dispatch({ type: PROJECT_SELECTED_CHANGE, project })
     dispatch({ type: ISSUES_LOAD_MORE, project })
   }, [projects])
-
   usePageEvent('onReachBottom', () => {
     dispatch({ type: ISSUES_LOAD_MORE })
   })

@@ -9,6 +9,7 @@ const config: AppConfig = {
     'pages/issue/issue',
   ],
   window: {
+    navigationStyle: 'custom',
     navigationBarTitleText: 'sentry client',
     navigationBarBackgroundColor: '#282c34'
   }
