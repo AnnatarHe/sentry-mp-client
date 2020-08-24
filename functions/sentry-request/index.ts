@@ -2,9 +2,12 @@
 import * as cloud from 'wx-server-sdk'
 import fetch from 'node-fetch'
 
-cloud.init()
+cloud.init({
+  env: 'prod-819fo'
+})
 
 type eventRequest = {
+  endpointId: string
   method: string
   token: string
   url: string
@@ -13,8 +16,19 @@ type eventRequest = {
 
 // 云函数入口函数
 exports.main = async (event: eventRequest, context: any) => {
+  const db = cloud.database()
+  const endpoints = db.collection("endpoints")
+
+  let endpointUrl = ''
+  const endpoint = await endpoints.where({ _id: event.endpointId }).get()
+  if (!endpoint || endpoint.data.length < 1) {
+    endpointUrl = 'https://sentry.io'
+  } else {
+    endpointUrl = endpoint.data[0].origin
+  }
+
   const resp = await fetch(
-    `https://sentry.io/api/0/${event.url}`,
+    `${endpointUrl}/api/0/${event.url}`,
     {
       body: event.body,
       method: event.method,

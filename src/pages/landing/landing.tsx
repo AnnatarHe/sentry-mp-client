@@ -24,7 +24,11 @@ function Landing(props: LandingPageProps) {
 
     dispatch({
       type: PROJECT_FETCH_SAGA,
-      redirectTo: to ? (`/pages/${to || 'project/project'}?` + qs.stringify(params)) : null
+      onFetched: () => {
+        redirectTo({
+          url: to ? (`/pages/${to || 'project/project'}?` + qs.stringify(params)) : '/pages/project/project'
+        })
+      }
     })
   }, [props.location.query])
 

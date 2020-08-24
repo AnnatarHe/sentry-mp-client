@@ -4,10 +4,11 @@ import { fetchAllProjects } from '@/service/organizations'
 import { showLoading, hideLoading, showToast, redirectTo, showTabBar } from 'remax/wechat'
 import { fetchProjectIssues } from '@/service/project'
 import { ProjectStore } from '../reducers/project'
-import { SentryProject } from '@/service/types'
+import { SentryProject, SentryServerResponse, SentryIssue } from '@/service/types'
 
 function* initProjectsData(action: any) {
-  const redirectUrl = action.redirectTo
+  const onDataFetched = action.onFetched
+  // const redirectUrl = action.redirectTo
   yield call(showLoading, {
     title: 'loading...',
     mask: true,
@@ -20,9 +21,13 @@ function* initProjectsData(action: any) {
     yield put({ type: ISSUES_LOAD_MORE })
     yield call(hideLoading)
 
-    yield call(redirectTo, {
-      url: redirectUrl ?? '/pages/project/project'
-    })
+    if (onDataFetched) {
+      yield call(onDataFetched)
+    }
+
+    // yield call(redirectTo, {
+    //   url: redirectUrl ?? '/pages/project/project'
+    // })
   } catch (e) {
     console.error(e)
     yield call(hideLoading)
@@ -48,7 +53,24 @@ export function* loadIssue(action: any) {
     return
   }
 
-  const issues = yield call(fetchProjectIssues, currentProject.organization.slug, currentProject.slug, nextKey)
+  // yield call(showLoading, {
+  //   mask: true,
+  //   title: 'Loading'
+  // })
+
+  let issues: SentryServerResponse<SentryIssue[]>
+
+  // try {
+    issues = yield call(fetchProjectIssues, currentProject.organization.slug, currentProject.slug, nextKey)
+  //   yield call(hideLoading)
+  // } catch (e) {
+  //   yield call(hideLoading)
+  //   yield call(showToast, {
+  //     icon: 'none',
+  //     title: e.toString()
+  //   })
+  //   throw e
+  // }
 
   yield put({
     type: ISSUE_LOADED,

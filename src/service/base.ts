@@ -1,5 +1,7 @@
-import { getStorageSync, setStorage, navigateTo, cloud } from "remax/wechat"
+import { getStorageSync, setStorage, navigateTo, cloud, showToast, request } from "remax/wechat"
 import { parseLink } from "./utils"
+import { AppEndpoint, appEndpoint } from "./endpoint";
+import { SentryServerResponse } from "./types";
 
 export enum HTTPMethod {
   GET = 'GET',
@@ -23,6 +25,7 @@ cloud.init({
 })
 
 type proxyRequestParams = {
+  endpointId: string
   method: string
   token: string
   url: string
@@ -41,20 +44,33 @@ interface proxyResponse<T> {
 
 function cloudRequest<T>(params: proxyRequestParams): Promise<proxyResponse<T>> {
   return cloud.callFunction({
-    name: 'hello',
+    name: 'sentry-request',
     data: params
   }).then((res: proxyResponse<T>) => res)
 }
 
 export async function sentryRequest<T, R>(url: string, method: HTTPMethod, body?: T) {
   const resp = await cloudRequest<R>({
+    endpointId: appEndpoint.cloudEndpointID,
     method,
     token: API_TOKEN,
     url,
     body
+  // const resp = await request({
+  //   method,
+  //   url: `${AppEndpoint.AVAILABLE_ENDPOINTS[appEndpoint.host]}/api/0/${url}`,
+  //   header: {
+  //     Authorization: `Bearer ${API_TOKEN}`,
+  //   },
+  //   timeout: 10000,
+  //   data: body
+  }).catch(e => {
+    showToast({
+      icon: 'none',
+      title: e.toString()
+    })
+    throw e
   })
-
-  console.log(resp)
 
   if (resp.result.status === 401) {
     navigateTo({
@@ -73,10 +89,5 @@ export async function sentryRequest<T, R>(url: string, method: HTTPMethod, body?
     next,
     hasMore,
     data: resp.result.body
-  } as {
-    prev?: string,
-    next?: string,
-    hasMore: boolean,
-    data: R
-  }
+  } as SentryServerResponse<R>
 }

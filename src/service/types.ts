@@ -1,3 +1,11 @@
+export interface SentryServerResponse<T> {
+  prev?: string,
+  next?: string,
+  hasMore: boolean,
+  data: T
+}
+
+
 export interface Status {
   id: string;
   name: string;
@@ -234,7 +242,7 @@ export interface Mechanism {
 }
 
 export interface Value {
-  stacktrace: Stacktrace;
+  stacktrace?: Stacktrace;
   module?: any;
   rawStacktrace?: any;
   mechanism: Mechanism;

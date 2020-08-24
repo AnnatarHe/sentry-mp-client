@@ -27,6 +27,9 @@
     color: @white-local;
     font-weight: 800;
     font-size: 48px;
+    max-width: calc(100vw - @gap-size * 4);
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
   .culprit {
     font-size: 24px;
@@ -34,7 +37,7 @@
     color: @grey-local;
     max-width: calc(100vw - @gap-size * 4);
     text-overflow: ellipsis;
-    
+    overflow: hidden;
   }
 
   .info {

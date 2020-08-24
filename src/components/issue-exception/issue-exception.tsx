@@ -17,7 +17,7 @@ function IssueException({ value }: { value: Value }) {
         ))}
       </View>
       <View className={styles.frames}>
-        {value.stacktrace.frames.map((frame, index) => (
+        {value.stacktrace?.frames.map((frame, index) => (
           <IssueExceptionFrame frame={frame} key={index} />
         ))}
       </View>

@@ -1,5 +1,5 @@
 {
-  "name": "hello",
+  "name": "sentry-request",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "node-fetch": "^2.6.0",
     "wx-server-sdk": "~2.2.0"
   }
 }

@@ -4,7 +4,8 @@ const config: PageConfig = {
   navigationBarTitleText: 'index',
   navigationStyle: 'custom',
   backgroundColorBottom: '#282c34',
-  backgroundColorTop: '#f1c40f',
+  backgroundColorTop: '#282c34',
+  enablePullDownRefresh: true,
 };
 
 export default config;

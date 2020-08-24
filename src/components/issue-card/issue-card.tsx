@@ -21,7 +21,7 @@ function IssueCard({ issue }: IssueCardProps) {
         <Text>{issue.shortId}</Text>
         <Text>
           🙄{formatDistanceToNow(new Date(issue.lastSeen))} —
-                 🤡 {formatDistanceToNow(new Date(issue.firstSeen))}
+                 🤡 {formatDistanceToNow(new Date(issue.firstSeen))} ago
         </Text>
       </View>
       <View className={styles.countInfo}>

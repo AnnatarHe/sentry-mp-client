@@ -6,6 +6,13 @@ sentry 小程序客户端，方便查看最新的 bug
 
 视频地址： [Sentry 小程序客户端](https://www.bilibili.com/video/BV1jf4y1m79T/)
 
+## Dev
+
+```bash
+$ gulp # 复制云函数
+$ npm run dev # 启动小程序开发 watcher
+```
+
 ## 背景
 
 线上有 bug，但是根据 “线上有 bug” 这么一段话怎么判断出到底是真的有问题还有谁在瞎 bb。大冬天的也不想起床开电脑查报错。所以这个小程序诞生了（虽然你可能一点儿都不想用）

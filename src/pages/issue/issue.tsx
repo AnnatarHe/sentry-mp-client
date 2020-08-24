@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { View, Text, navigateBack, redirectTo, showLoading, hideLoading } from 'remax/wechat'
+import React, { useState, useEffect, useCallback } from 'react'
+import { View, Text, navigateBack, redirectTo, showLoading, hideLoading, stopPullDownRefresh } from 'remax/wechat'
 import NavigationBar from '@/components/navigationbar/navigationbar'
 import { retrieveIssue, retrieveIssueLatestEvent } from '@/service/project'
 import { SentryIssueDetail, SentryEvent } from '@/service/types'
@@ -38,9 +38,9 @@ function useIssueData(id: string) {
   const [issueData, setIssueData] = useState<SentryIssueDetail | null>(null)
   const [issueEvent, setIssueEvent] = useState<SentryEvent | null>(null)
 
-  useEffect(() => {
+  const doFetchIssue = useCallback(() => {
     showLoading({ mask: true, title: 'Loading...' })
-    Promise.all([
+    return Promise.all([
       retrieveIssue(id),
       retrieveIssueLatestEvent(id)
     ]).then(data => {
@@ -50,6 +50,16 @@ function useIssueData(id: string) {
       hideLoading()
     })
   }, [id])
+
+  useEffect(() => {
+    doFetchIssue()
+  }, [id])
+
+  usePageEvent('onPullDownRefresh', () => {
+    doFetchIssue().finally(() => {
+      stopPullDownRefresh
+    })
+  })
 
   return {
     issueData,
