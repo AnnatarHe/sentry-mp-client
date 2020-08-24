@@ -9,7 +9,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "remax build -t wechat -w",
-    "build": "cross-env NODE_ENV=production remax build -t wechat",
+    "build": "cross-env NODE_ENV=production ./node_modules/.bin/remax build -t wechat",
     "clean": "rimraf dist",
     "prebuild": "npm run clean",
     "test": "jest",
@@ -47,9 +47,8 @@
     "gulp": "^4.0.2",
     "gulp-typescript": "^6.0.0-alpha.1",
     "jest": "^25.5.4",
-    "remax-cli": "^1.14.1",
     "rimraf": "^3.0.2",
     "standard-version": "^9.0.0",
-    "typescript": "^3.9.7"
+    "typescript": "^4.0.2"
   }
 }
