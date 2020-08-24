@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.0.0](https://github.com/AnnatarHe/sentry-mp-client/compare/v0.0.5...v1.0.0) (2020-08-24)
+
+
+### Features
+
+* **deps:** upgrade remax to 2.x version ([a21d4a5](https://github.com/AnnatarHe/sentry-mp-client/commit/a21d4a5eb4043c1995c0f4c599f869bd512e5230))
+* **doc:** update docs ([4a0617b](https://github.com/AnnatarHe/sentry-mp-client/commit/4a0617b714f5950e21ca89c05cf618aab297d9cf))
+* **func:** migrate api call to serverless func ([940dd43](https://github.com/AnnatarHe/sentry-mp-client/commit/940dd437e6feb4cf8599d628684777770f567129))
+* **proxy:** use serverless as proxy ([4dca752](https://github.com/AnnatarHe/sentry-mp-client/commit/4dca752f520f0c870943d400eb968aa4ab65bb1a))
+
+
+### Bug Fixes
+
+* **issue-card:** fix text overflow ([2236d88](https://github.com/AnnatarHe/sentry-mp-client/commit/2236d882746541a754d488587a710360600190df))
+* **share:** fix share issue ([a133492](https://github.com/AnnatarHe/sentry-mp-client/commit/a133492588f9d3d80f9be9898b4450304aedcca6))
+
 ### [0.0.5](https://github.com/AnnatarHe/sentry-mp-client/compare/v0.0.4...v0.0.5) (2020-03-01)
 
 
