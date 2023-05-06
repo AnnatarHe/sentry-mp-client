@@ -1,7 +1,7 @@
 {
   "name": "sentry-mp-client",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "sentry mp client(not sdk)",
   "main": "index.tsx",
   "keywords": [],

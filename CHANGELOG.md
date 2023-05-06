@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/AnnatarHe/sentry-mp-client/compare/v1.0.0...v1.1.0) (2023-05-06)
+
+
+### Features
+
+* **docs:** update docs ([301ec24](https://github.com/AnnatarHe/sentry-mp-client/commit/301ec24d8cbe97cea580e0b25ed6ffecc190e0ce))
+* **pkg:** upgrade pkgs ([706e2a3](https://github.com/AnnatarHe/sentry-mp-client/commit/706e2a3a760a466a0ca2753b59104fa491532c0e))
+
+
+### Bug Fixes
+
+* **cloud:** remove cloud service ([dc1b3b8](https://github.com/AnnatarHe/sentry-mp-client/commit/dc1b3b8a708e381f01c279616b2c4b23cebb046b))
+
 ## [1.0.0](https://github.com/AnnatarHe/sentry-mp-client/compare/v0.0.5...v1.0.0) (2020-08-24)
 
 
