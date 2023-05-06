@@ -14,16 +14,7 @@ import './style.less'
 import { EndpointType } from '@/service/endpoint'
 
 type EndpointEditorProps = {
-  onAdded(endpoint: any): void
-}
-
-type endpointCreateResponse = {
-  requestID: string
-  result: {
-    result: EndpointType & {
-      errMsg: string
-    }
-  }
+  onAdded(endpoint: EndpointType): void
 }
 
 const urlRegexp = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/
@@ -31,7 +22,7 @@ const urlRegexp = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9(
 function EndpointEditor(props: EndpointEditorProps) {
   const [val, setVal] = useState('')
 
-  const onAdd = useCallback(() => {
+  const onAdd = useCallback(async () => {
     if (!urlRegexp.test(val)) {
       showToast({
         icon: 'none',
@@ -44,20 +35,11 @@ function EndpointEditor(props: EndpointEditorProps) {
       mask: true,
       title: 'Submitting'
     })
-    cloud.callFunction({
-      name: 'endpoint-create',
-      data: {
-        origin: val
-      }
-    }).then((res: endpointCreateResponse) => {
-      hideLoading()
-      showToast({
-        icon: 'none',
-        title: 'added'
-      })
-      props.onAdded(res.result.result)
-    }).catch(() => {
-      hideLoading()
+    const u = new URL(val)
+    props.onAdded({
+      _id: Math.random().toString(),
+      openid: '',
+      origin: u.host
     })
   }, [val])
 

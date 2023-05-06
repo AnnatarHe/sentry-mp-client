@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react'
-import { View, Navigator, Text, Picker, cloud, Input } from 'remax/wechat'
+import { View, Navigator, Text, Picker } from 'remax/wechat'
 
 import styles from './style.module.less'
 import NavigationBar from '@/components/navigationbar/navigationbar'
@@ -34,15 +34,6 @@ function useEndpoints() {
   const [endpoints, setEndpoints] = useState<EndpointType[]>([])
   const [current, setCurrent] = useState(appEndpoint.cloudEndpointID)
 
-  useEffect(() => {
-    cloud.callFunction({
-      name: 'endpoint-list',
-      data: {}
-    }).then((res: EndpointListResponse) => {
-      setEndpoints(res.result.result)
-    })
-  }, [])
-
   const onAdd = useCallback((nv: EndpointType) => {
     setEndpoints(e => [...e].concat(nv))
     if (endpoints.length === 0) {
@@ -68,10 +59,7 @@ function useEndpoints() {
 
 function SettingsPage() {
   const onNavigateUp = useNavigateUp()
-
   const { endpoints, onAdd, current, onUpdateCurrent } = useEndpoints()
-
-  console.log(endpoints, current)
   return (
     <View className={styles.settings + ' settings-page'}>
       <NavigationBar onBack={onNavigateUp} hasHolder>
@@ -101,13 +89,11 @@ function SettingsPage() {
             </View>
           </Picker>
         </View>
-
         <EndpointEditor
           onAdded={(endpoint: EndpointType) => {
             onAdd(endpoint)
           }}
         />
-
       </View>
     </View>
   )
